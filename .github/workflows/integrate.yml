@@ -15,7 +15,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.12 
+          python-version: 3.12
 
       - name: Create virtual environment
         run: |
@@ -35,4 +35,7 @@ jobs:
           echo "Contents of site-packages: $(ls -l venv/lib/python*/site-packages)"
 
       - name: Run tests
-        run: python test.py
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: |
+          exit $?(python test.py)
